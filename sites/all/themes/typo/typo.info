@@ -1,0 +1,69 @@
+name = Typo
+description = A drupal theme of snappytheme.com.
+core = 7.x
+base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+regions[home_section]   = 'Home Section'
+regions[navigation]     = 'Navigation'
+regions[header]         = 'Top Bar'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Primary'
+regions[sidebar_second] = 'Secondary'
+regions[footer]         = 'Footer'
+regions[page_top]       = 'Page top'
+regions[page_bottom]    = 'Page bottom'
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = css/bootstrap.css
+stylesheets[all][] = css/overrides.css
+stylesheets[all][] = css/animate.css
+stylesheets[all][] = css/font-awesome.css
+stylesheets[all][] = css/jquery.bxslider.css
+stylesheets[all][] = css/flexslider.css
+stylesheets[all][] = css/magnific-popup.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/responsive.css
+
+; For information on choosing the desired method, please read the Drupal
+; Bootstrap sub-theme "how-to" documentation:
+; https://drupal.org/node/1978010
+
+; ;----------------------------------
+; ; METHOD 1: Bootstrap Source Files
+; ;----------------------------------
+; 
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+
+scripts[] = 'js/jquery.migrate.js'
+scripts[] = 'js/bootstrap.js'
+scripts[] = 'js/jquery.imagesloaded.min.js'
+scripts[] = 'js/waypoint.min.js'
+;scripts[] = 'js/smooth-scroll.js'
+;scripts[] = 'js/plugins-scroll.js'
+scripts[] = 'js/jquery.magnific-popup.min.js'	
+scripts[] = 'js/script.js'	
+
+;
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+; settings[bootstrap_cdn] = ''
+
+
+; ;-------------------------
+; ; METHOD 2: Bootstrap CDN
+; ;-------------------------
+;
+; Method 2 uses BootstrapCDN, the only thing you might need to provide here
+; is overrides to Bootstrap theme settings. Copy them here from the base theme
+; to override.

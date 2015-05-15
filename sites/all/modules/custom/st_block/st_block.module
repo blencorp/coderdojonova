@@ -1,0 +1,362 @@
+<?php
+
+function st_block_menu() {
+  $items = array();
+  $items['admin/settings/st-block'] = array(
+    'title' => 'ST block module settings',
+    'description' => 'ST block settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('st_block_admin'),
+    'access arguments' => array('administer st block settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function st_block_permission() {
+  return array(
+    'administer block animate' => array(
+      'title' => t('Administer block animate'),
+      'description' => t('Set animate class and background, ... for blocks.'),
+    ),
+  );
+}
+
+function st_block_admin() {
+  $form = array();
+
+  $form['stellar_parallax'] = array(
+    '#type' => 'radios',
+    '#title' => t('Stellar parallax'),
+    '#options' => array(
+      1 => t('Yes'),
+      0 => t('No'),
+    ),
+    '#default_value' => variable_get('stellar_parallax', 0),
+    '#maxlength' => 255,
+    '#description' => t('Choose Yes to enable block parallax, No to disable block parallax'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Alter block edit form to add configuration field.
+ */
+function st_block_form_alter(&$form, &$form_state, $form_id) {
+  if (user_access('administer block animate') && ($form_id == 'block_admin_configure' || $form_id == 'block_add_block_form')) {
+    drupal_add_js(drupal_get_path('module', 'st_block') . '/js/st_block_config.js');
+    // Load statically cached block object used to display the form.
+    $block = block_load($form['module']['#value'], $form['delta']['#value']);
+
+    $animate_options = get_animate_options();
+
+    $form['settings']['st_block_id'] = array(
+      '#type' => 'textfield',
+      '#title' => t('ST Block ID'),      
+      '#default_value' => isset($block->st_block_id) ? $block->st_block_id : '',
+      '#description' => t('The block ID.'),
+      '#maxlength' => 255,
+    );
+
+    $form['settings']['animate'] = array(
+      '#type' => 'select',
+      '#title' => t('Animate'),
+      '#options' => $animate_options,
+      '#default_value' => isset($block->animate) ? $block->animate : '',
+      '#description' => t('The block animate.'),
+      '#maxlength' => 255,
+    );
+
+    $form['settings']['background'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('background'),
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    );
+
+    $form['settings']['background']['background_type'] = array(
+      '#type' => 'radios',
+      '#title' => t('Background type'),
+      '#options' => array(
+        '' => t('None'),
+        'video' => t('Video'),
+        'image' => t('Image'),
+      ),
+      '#default_value' => isset($block->background_type) ? $block->background_type : '',
+    );
+    $form['settings']['background']['video_embed'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Video embed'),
+      '#default_value' => isset($block->video_embed) ? $block->video_embed : '',
+      '#description' => t('The youtube or vimeo video embed.'),      
+    );    
+    $form['settings']['background']['background_image'] = array(      
+      '#type' => 'managed_file',
+      '#title' => t('Background image'),
+      '#default_value' => isset($block->background_image) ? $block->background_image : '',
+      '#upload_validators' => array(
+          'file_validate_extensions' => array('gif png jpg jpeg'),
+          'file_validate_size' => array(1 * 1024 * 1024),
+      ),
+      '#theme' => 'st_block_background_image',
+      '#upload_location' => 'public://files/',
+      '#description' => t('Upload a file, allowed extensions: jpg, jpeg, png, gif'), 
+    );
+    $form['settings']['background']['stellar_ratio'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Stellar parallax ratio'),      
+      '#default_value' => isset($block->stellar_ratio) ? $block->stellar_ratio : 0,
+      '#description' => variable_get('stellar_parallax') == 0 ? t('<p>'.l('Enable', 'admin/settings/st-block').' block parallax.</p>The ratio is relative to the natural scroll speed, so a ratio of 0.5 would cause the element to scroll at half-speed, a ratio of 1 would have no effect, and a ratio of 2 would cause the element to scroll at twice the speed.') : t('The ratio is relative to the natural scroll speed, so a ratio of 0.5 would cause the element to scroll at half-speed, a ratio of 1 would have no effect, and a ratio of 2 would cause the element to scroll at twice the speed.'),
+      '#maxlength' => 255,
+    );
+
+    $form['#validate'][] = 'st_block_form_validate';
+    $form['#submit'][] = 'st_block_form_submit';       
+  }
+}
+
+
+function st_block_form_validate($form, &$form_state) {
+  $file = file_load($form_state['values']['background_image']);
+  
+  if ($form_state['values']['background_type'] == 'image' && !isset($file->fid)) {
+    form_set_error('', t('Choose background image please.'));
+  }
+}
+
+/**
+ * Helper function: additional submit callback for block configuration pages.
+ *
+ */
+function st_block_form_submit($form, &$form_state) {  
+  if ($form_state['values']['form_id'] == 'block_admin_configure' || $form_state['values']['form_id'] == 'block_add_block_form') {
+    
+    if (user_access('administer blocks')) {    
+      if ($form_state['values']['background_type'] == 'image') {
+        $block = block_load($form_state['values']['module'], $form_state['values']['delta']);
+        $file = file_load($form_state['values']['background_image']);
+        $file->status = FILE_STATUS_PERMANENT;
+        
+        file_usage_add($file, 'st_block', 'block', $block->bid);
+        file_save($file);
+      }
+
+      $status_save = db_update('block')
+        ->fields(
+          array(
+            'animate' => $form_state['values']['animate'],
+            'background_type' => $form_state['values']['background_type'],
+            'video_embed' => $form_state['values']['video_embed'],
+            'stellar_ratio' => $form_state['values']['stellar_ratio'],
+            'background_image' => $form_state['values']['background_image'],
+            'st_block_id' => $form_state['values']['st_block_id'],
+          )
+        )
+        ->condition('module', $form_state['values']['module'])
+        ->condition('delta', $form_state['values']['delta'])
+        ->execute();
+      
+      // Flush all context module cache to use the updated summary.
+      if (module_exists('context')) {
+        cache_clear_all('context', 'cache', TRUE);
+      }
+    }
+  }
+}
+
+/**
+ * Implements theme_preprocess_block().
+ *
+ */
+function st_block_preprocess_block(&$vars) {      
+  $block = $vars['block'];
+  $module_path = drupal_get_path('module', 'st_block');
+
+  if (isset($block->animate) && $block->animate != '') {    
+    drupal_add_css($module_path . '/css/animate.min.css');
+    drupal_add_js($module_path . '/js/waypoints.min.js'); 
+    drupal_add_js($module_path . '/js/st_block.js');     
+    drupal_add_js($module_path . '/js/jquery.vimeo.api.min.js');     
+    $vars['classes_array'] = array_merge($vars['classes_array'], array('triggerAnimation animated'));
+    $vars['attributes_array'] = array_merge($vars['attributes_array'], array('data-animate' => isset($block->animate) ? $block->animate : ''));
+  }
+
+  if (isset($block->background_type) && $block->background_type != '') {
+    if ($block->background_type == 'video') {
+      $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block', 'st-block-video-background'));
+    }
+    else {
+      $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block'));
+    }
+    drupal_add_css($module_path . '/css/st-block.css');
+    $vars['theme_hook_suggestions'][] = 'st_block_background';
+  }
+
+  if (variable_get('stellar_parallax') == 1 && isset($block->background_type) && $block->background_type == 'image') {    
+    $vars['attributes_array'] = array_merge($vars['attributes_array'], array('data-stellar-background-ratio' => isset($block->stellar_ratio) ? $block->stellar_ratio : 0));
+    $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block-parallax'));
+    drupal_add_js($module_path . '/js/st_block.js');
+    drupal_add_js($module_path . '/js/jquery.vimeo.api.min.js');
+    drupal_add_js($module_path . '/js/jquery.stellar.min.js');
+    drupal_add_js($module_path . '/js/jquery.appear.js');
+    drupal_add_js($module_path . '/js/plugins-scroll.js');
+  }
+
+  if (isset($block->st_block_id) && $block->st_block_id != '') {
+    $vars['block_html_id'] = $block->st_block_id;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * 
+ */
+function st_block_preprocess_panels_pane(&$vars) {
+  if ($vars['pane']->type != 'block') {
+    return;
+  }
+  
+  $block_parts = explode('-', $vars['pane']->subtype);
+  $module = $block_parts[0];
+  unset($block_parts[0]);
+  $block_delta = implode('-', $block_parts);
+  $block = block_load($module, $block_delta);
+  $module_path = drupal_get_path('module', 'st_block');
+  
+  if (isset($block->animate) && $block->animate != '') {    
+    drupal_add_css($module_path . '/css/animate.min.css');
+    drupal_add_js($module_path . '/js/waypoints.min.js'); 
+    drupal_add_js($module_path . '/js/st_block.js');    
+    drupal_add_js($module_path . '/js/jquery.vimeo.api.min.js');      
+    $vars['classes_array'] = array_merge($vars['classes_array'], array('triggerAnimation animated'));
+    $vars['attributes_array'] = array_merge($vars['attributes_array'], array('data-animate' => isset($block->animate) ? $block->animate : ''));
+  }
+
+  if (isset($block->background_type) && $block->background_type != '') {
+    if ($block->background_type == 'video') {
+      $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block', 'st-block-video-background'));          
+    }
+    else {
+      $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block'));
+    }
+    drupal_add_css($module_path . '/css/st-block.css');
+    $vars['theme_hook_suggestions'][] = 'st_block_background_pane';      
+  }
+
+  if (variable_get('stellar_parallax') == 1 && isset($block->background_type) && $block->background_type == 'image') {    
+    $vars['attributes_array'] = array_merge($vars['attributes_array'], array('data-stellar-background-ratio' => isset($block->stellar_ratio) ? $block->stellar_ratio : 0));
+    $vars['classes_array'] = array_merge($vars['classes_array'], array('st-block-parallax'));
+    drupal_add_js($module_path . '/js/st_block.js');
+    drupal_add_js($module_path . '/js/jquery.vimeo.api.min.js');
+    drupal_add_js($module_path . '/js/jquery.stellar.min.js');
+    drupal_add_js($module_path . '/js/jquery.appear.js');
+    drupal_add_js($module_path . '/js/plugins-scroll.js');
+  }
+  
+  if (isset($block->st_block_id) && $block->st_block_id != '') {
+    $vars['block_html_id'] = $block->st_block_id;
+  }
+}
+
+function st_block_theme() {
+  return array(
+    'st_block_background' => array(
+      'template' => 'st-block-background',
+    ),
+    'st_block_background_pane' => array(
+      'template' => 'st-block-background-pane',      
+    ),
+    'st_block_background_image' => array(
+      'render element' => 'element',
+    ),
+  );
+}
+
+
+/**
+ * Implements st_block_background_image theme callback.
+ */
+function theme_st_block_background_image($variables) {
+
+    $element = $variables['element'];
+    
+    if (isset($element['#file']->uri)) {
+        $output = '<div id="edit-block-background-image-wrapper"><div class="form-item form-type-managed-file form-item-block-background-image"><span class="file">';
+        $output .= '<img height="50px" src="' . image_style_url('thumbnail', $element['#file']->uri) . '" />';
+        $output .= '</span><input type="submit" id="edit-' . $element['#name'] . '-remove-button" name="' . $element['#name'] . '_remove_button" value="Remove" class="form-submit ajax-processed">';
+        $output .= '<input type="hidden" name="' . $element['#name'] . '[fid]" value="' . $element['#file']->fid . '"></div></div>';
+        return $output;
+    }
+}
+
+function get_animate_options() {
+  return array(
+    '' => '- None -',
+    'Attention Seekers' => array(
+      'bounce' => 'bounce',
+      'flash' => 'flash',
+      'pulse' => 'pulse',
+      'rubberBand' => 'rubberBand',
+      'shake' => 'shake',
+      'swing' => 'swing',
+      'tada' => 'tada',
+      'wobble' => 'wobble',
+    ),
+    'Bouncing Entrances' => array(
+      'bounceIn' => 'bounceIn',
+      'bounceInDown' => 'bounceInDown',
+      'bounceInLeft' => 'bounceInLeft',
+      'bounceInRight' => 'bounceInRight',
+      'bounceInUp' => 'bounceInUp',
+    ),    
+    'Fading Entrances' => array(
+      'fadeIn' => 'fadeIn',
+      'fadeInDown' => 'fadeInDown',
+      'fadeInDownBig' => 'fadeInDownBig',
+      'fadeInLeft' => 'fadeInLeft',
+      'fadeInLeftBig' => 'fadeInLeftBig',
+      'fadeInRight' => 'fadeInRight',
+      'fadeInRightBig' => 'fadeInRightBig',
+      'fadeInUp' => 'fadeInUp',
+      'fadeInUpBig' => 'fadeInUpBig',
+    ),    
+    'Flippers' => array(
+      'flip' => 'flip',
+      'flipInX' => 'flipInX',
+      'flipInY' => 'flipInY',      
+    ),
+    'Lightspeed' => array(
+      'lightSpeedIn' => 'lightSpeedIn',      
+    ),
+    'Rotating Entrances' => array(
+      'rotateIn' => 'rotateIn',
+      'rotateInDownLeft' => 'rotateInDownLeft',
+      'rotateInDownRight' => 'rotateInDownRight',
+      'rotateInUpLeft' => 'rotateInUpLeft',
+      'rotateInUpRight' => 'rotateInUpRight',
+    ),    
+    'Specials' => array(
+      'hinge' => 'hinge',
+      'rollIn' => 'rollIn',      
+    ),
+    'Zoom Entrances' => array(
+      'zoomIn' => 'zoomIn',
+      'zoomInDown' => 'zoomInDown',
+      'zoomInLeft' => 'zoomInLeft',
+      'zoomInRight' => 'zoomInRight',
+      'zoomInUp' => 'zoomInUp',
+    ),    
+  );
+}
+
+function st_block_init() {
+  if (arg(0) == 'admin') {
+    drupal_add_js(drupal_get_path('theme', 'typo').'/js/jquery.migrate.js', array('weight' => -99));
+  }
+}

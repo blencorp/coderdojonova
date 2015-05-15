@@ -1,0 +1,10 @@
+name = ST Block
+package = snappytheme
+description = Setting block animation, block image background, block video background, block parralax, ...
+dependencies[] = jquery_update
+
+project status url = http://snappytheme.com/release-history
+version = "7.x-1.1"
+core = "7.x"
+project = "st_block"
+datestamp = "1406338351"

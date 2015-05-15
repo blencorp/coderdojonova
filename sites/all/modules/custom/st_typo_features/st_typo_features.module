@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ST Typo Features feature.
+ */
+
+include_once 'st_typo_features.features.inc';
