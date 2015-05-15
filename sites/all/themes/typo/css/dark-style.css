@@ -1,0 +1,140 @@
+/*********************************************
+    -   Dark part  -
+**********************************************/
+
+body.dark {
+    background-color: #21272b;
+}
+
+.dark .navbar {
+    background: #373f45;
+    border-bottom: 1px solid #1c2124;
+}
+
+.dark .navbar-default .navbar-nav > li > a.current, .dark .navbar-default .navbar-nav > li > a:hover {
+    color: #ef621c;
+    background: #21272b;
+}
+
+.dark .navbar-default .navbar-nav > li > a {
+    color: #777;
+}
+
+.dark .typo, .dark .block-title {
+    color: #96a3ab;
+}
+
+.dark .title-section p, .dark .view-header p {
+    color: #fff;
+}
+
+.dark .featured-box {
+    background: #373f45;
+}
+
+.dark .featured-box h1 {
+    color: #ef621c;
+}
+
+.dark #services-section h3 {
+    color: #ef621c;
+}
+
+.dark #isotope-options li a {
+    color: #96a3ab;
+}
+
+.dark #isotope-options li a:hover, .dark #isotope-options li a.selected {
+    color: #ef621c;
+}
+
+.dark .right-content {
+    color: #96a3ab;
+}
+
+.dark .right-content div.info p.comment {
+    color: #96a3ab;
+}
+
+.dark .right-content h2 a {
+    color: #ef621c;
+}
+
+.dark .right-content h2 a:hover {
+    opacity: 0.7;
+}
+
+.dark #blog-section .blog-text {
+    color: #fff;
+}
+
+.dark #blog-section .button a {
+    background: #373f45;
+}
+
+.dark #blog-section .button a:hover {
+    background: #ef621c;
+}
+
+.dark .clients-box, .dark .team-box {
+    background: #373f45;
+}
+
+.dark .clients-box h1, .dark .team-box h1 {
+    color: #ef621c;
+}
+
+.dark .clients-box p, .dark .team-box p {
+    color: #96a3ab;
+}
+
+.dark .pricing-table {
+    background: #373f45;
+}
+
+.dark .pricing-table span {
+    color: #96a3ab;
+}
+
+.dark .pricing-table .price {
+    background: #41494f;
+}
+
+.dark .pricing-table li:nth-child(2n+1) {
+    background: #4b5358;
+}
+
+.dark .contact-box h2 {
+    color: #ef621c;
+}
+
+.dark .contact-box p, .dark .info li {
+    color: #fff;
+}
+
+.dark .info .adress, .dark .info .fax {
+    color: #96a3ab;
+}
+
+.dark label {
+    color: #fff;
+}
+
+.dark .contact-form textarea, .dark .contact-form input[type="text"], .dark .comment-form textarea, 
+.dark .comment-form input[type="text"] {
+    background: #373f45;
+    border: 1px solid #535c62;
+    color: #fff;
+}
+
+.dark footer p {
+    color: #96a3ab;
+}
+
+.dark.page-blogs div.blog-text, .dark.page-taxonomy div.blog-text, .dark.node-type-blog .field-name-body {
+    color: #fff;
+}
+
+.dark aside h2.block-title {
+    color: #fff;
+}

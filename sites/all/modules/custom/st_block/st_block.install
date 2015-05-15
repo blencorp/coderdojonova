@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the st_block module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function st_block_install() {
+  $schema['block'] = array();
+  st_block_schema_alter($schema);
+  foreach ($schema['block']['fields'] as $field => $spec) {
+    if (db_field_exists('block', $field)) {
+      watchdog('system', 'Module install: Attempt to recreate field: "%field", when it already exists.', array('%field' => $field), WATCHDOG_WARNING);
+    }
+    else {
+      db_add_field('block', $field, $spec);
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function st_block_uninstall() {
+  $schema['block'] = array();
+  st_block_schema_alter($schema);
+  foreach ($schema['block']['fields'] as $field => $specs) {
+    db_drop_field('block', $field);
+  }
+}
+
+/**
+ * Implements hook_schema_alter().
+ *
+ * Other modules, such as i18n_block also modify the block database table.
+ */
+function st_block_schema_alter(&$schema) {
+  if (isset($schema['block'])) {
+    $schema['block']['fields']['st_block_id'] = array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+      'default' => '',
+      'description' => 'The animate class of block.',
+    );
+    $schema['block']['fields']['animate'] = array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+      'default' => '',
+      'description' => 'The animate class of block.',
+    );
+    $schema['block']['fields']['background_type'] = array(
+      'type' => 'varchar',  
+      'length' => 255,    
+      'not null' => FALSE,
+      'default' => '',
+      'description' => 'The background type of block.',
+    );
+    $schema['block']['fields']['video_embed'] = array(
+      'type' => 'text',           
+      'not null' => FALSE,      
+      'description' => 'The video embed of block.',
+    );
+    $schema['block']['fields']['background_image'] = array(
+      'type' => 'varchar',  
+      'length' => 255,    
+      'not null' => FALSE,
+      'default' => '',
+      'description' => 'The background image of block.',
+    );
+    $schema['block']['fields']['stellar_ratio'] = array(
+      'type' => 'int',      
+      'not null' => FALSE,
+      'default' => '0',
+      'description' => 'The stellar ratio of block.',
+    );
+  }
+}
