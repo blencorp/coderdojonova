@@ -339,7 +339,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<div class="title-section">
-	<h1 class="typo">OUR BLOG</h1>
+	<h1 class="typo">WHAT\'S NEW AT CODERDOJONOVA?</h1>
 	<span class="underline"></span>
 </div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -806,7 +806,7 @@ function st_typo_features_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'About Typo';
+  $handler->display->display_options['title'] = '2015 Class Schedule';
   $handler->display->display_options['css_class'] = 'container';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -814,7 +814,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '6';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'col-md-3';
@@ -825,21 +825,23 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<div class="title-section">
-	<h1 class="typo">ABOUT TYPO</h1>
+	<h1 class="typo">2015 Class Schedule</h1>
 	<span class="underline"></span>	
 
-	<p>Nunc nisl sapien, accumsan vitae sagittis quis, semper ut mi. Nulla lobortis orci id odio scelerisque, in cursus leo sagittis. Maecenas congue nisl et leo pretium, non imperdiet arcu pharetra. Integer id lacus iaculis, mollis libero tincidunt, vestibulum orci. Ut lobortis nibh nec velit euismod, nec tempus purus bibendum. Sed semper risus lorem, id fermentum nunc varius vehicula. Integer vel sem orci. In condimentum metus est, sit amet sagittis tortor suscipit ut.
-	</p>
+	<p>All CoderDojo NOVA classes are open to students 8-17 with the required participation of their parents who must remain onsite during programs. This format allows us to keep these programs free and safe for participants. All participants are required to bring their own laptops. On occasion, our sponsoring organizations will make laptops available to students. In general however, it is the responsibility of participants to supply their own laptops.  Below is our Spring 2015 schedule and please register your child at coderdojonova@gmail.com.</p>
 </div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
-  /* Field: Content: Awesome class */
-  $handler->display->display_options['fields']['field_awesome_class']['id'] = 'field_awesome_class';
-  $handler->display->display_options['fields']['field_awesome_class']['table'] = 'field_data_field_awesome_class';
-  $handler->display->display_options['fields']['field_awesome_class']['field'] = 'field_awesome_class';
-  $handler->display->display_options['fields']['field_awesome_class']['label'] = '';
-  $handler->display->display_options['fields']['field_awesome_class']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_awesome_class']['alter']['text'] = '<a href="#"><i class="[field_awesome_class]"></i></a>';
-  $handler->display->display_options['fields']['field_awesome_class']['element_label_colon'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_about_image']['id'] = 'field_about_image';
+  $handler->display->display_options['fields']['field_about_image']['table'] = 'field_data_field_about_image';
+  $handler->display->display_options['fields']['field_about_image']['field'] = 'field_about_image';
+  $handler->display->display_options['fields']['field_about_image']['label'] = '';
+  $handler->display->display_options['fields']['field_about_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_about_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_about_image']['settings'] = array(
+    'image_style' => 'medium',
+    'image_link' => '',
+  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -876,7 +878,6 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="about-post">
-	<a href="#"><i class="[field_awesome_class]"></i></a>
 	<h2>[title]</h2>
 	[body]
 </div>';
@@ -901,9 +902,9 @@ function st_typo_features_views_default_views() {
     'about' => 'about',
   );
 
-  /* Display: About Typo */
-  $handler = $view->new_display('block', 'About Typo', 'block');
-  $handler->display->display_options['block_description'] = 'About Typo';
+  /* Display: 2015 Class Schedule */
+  $handler = $view->new_display('block', '2015 Class Schedule', 'block');
+  $handler->display->display_options['block_description'] = '2015 Class Schedule';
   $export['our_work'] = $view;
 
   $view = new view();
@@ -1472,22 +1473,18 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '6';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'owlcarousel';
-  $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_4-colums-navigation';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div class="team-box">
-	<h1>OUR AWESOME <br>TEAM</h1>
-	<span class="works"></span>
-	<p>Want to join us? Show your port-folio</p>
-	<p> <a class="go-target" href="#contact-section">We are Hiring!</a></p>
+  $handler->display->display_options['header']['area']['content'] = '<div class="title-section">
+	<h1 class="typo">MEET OUR VOLUNTEERS AND MENTORS</h1>
+	<span class="underline"></span>
 </div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Field: Content: Image */
@@ -1505,7 +1502,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Post date';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1523,7 +1520,91 @@ function st_typo_features_views_default_views() {
 
   /* Display: Team member */
   $handler = $view->new_display('block', 'Team member', 'block');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'owlcarousel';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_single_image']['id'] = 'field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['table'] = 'field_data_field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['field'] = 'field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['label'] = '';
+  $handler->display->display_options['fields']['field_single_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_single_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_single_image']['settings'] = array(
+    'image_style' => 'member',
+    'image_link' => '',
+  );
   $handler->display->display_options['block_description'] = 'Team member';
+
+  /* Display: Team view */
+  $handler = $view->new_display('block', 'Team view', 'block_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'owlcarousel';
+  $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_4-colums-navigation';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_single_image']['id'] = 'field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['table'] = 'field_data_field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['field'] = 'field_single_image';
+  $handler->display->display_options['fields']['field_single_image']['label'] = '';
+  $handler->display->display_options['fields']['field_single_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_single_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_single_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_single_image']['settings'] = array(
+    'image_style' => 'flexslider_thumbnail',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '<h3>[title]</h3>';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Job Title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['label'] = '';
+  $handler->display->display_options['fields']['field_job_title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_job_title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_job_title']['alter']['text'] = '<h4>[field_job_title-value]</h4>';
+  $handler->display->display_options['fields']['field_job_title']['element_label_colon'] = FALSE;
+  /* Field: Content: Bio */
+  $handler->display->display_options['fields']['field_bio']['id'] = 'field_bio';
+  $handler->display->display_options['fields']['field_bio']['table'] = 'field_data_field_bio';
+  $handler->display->display_options['fields']['field_bio']['field'] = 'field_bio';
+  $handler->display->display_options['fields']['field_bio']['label'] = '';
+  $handler->display->display_options['fields']['field_bio']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bio']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_bio']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_bio']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_single_image]<br>
+[title]
+[field_job_title]
+[field_bio]<br>
+';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['block_description'] = 'MEET OUR VOLUNTEERS AND MENTORS';
   $export['team'] = $view;
 
   $view = new view();
