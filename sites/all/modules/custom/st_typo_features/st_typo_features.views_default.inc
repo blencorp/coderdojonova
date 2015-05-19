@@ -1713,14 +1713,12 @@ function st_typo_features_views_default_views() {
   /* Display: Team view */
   $handler = $view->new_display('block', 'Team view', 'block_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['css_class'] = 'full_yes  wpb_row vc_row-fluid section vc_custom_1416889806347';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'owlcarousel';
   $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_4-colums-navigation';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
@@ -1742,7 +1740,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['field_single_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_single_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_single_image']['settings'] = array(
-    'image_style' => 'flexslider_thumbnail',
+    'image_style' => 'member',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -1782,9 +1780,10 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_single_image]<br>
 [title]
 [field_job_title]
-[field_bio]<br>
-';
+[field_bio]<br>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'team-box2';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   $handler->display->display_options['block_description'] = 'MEET OUR VOLUNTEERS AND MENTORS';
   $export['team'] = $view;
 

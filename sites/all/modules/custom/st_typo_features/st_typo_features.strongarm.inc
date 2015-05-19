@@ -920,6 +920,13 @@ function st_typo_features_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'owlcarousel_items_desktop_owlcarousel_settings_4-colums-navigation_width';
+  $strongarm->value = 900;
+  $export['owlcarousel_items_desktop_owlcarousel_settings_4-colums-navigation_width'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'owlcarousel_navigation_text_owlcarousel_settings_4-colums-navigation';
   $strongarm->value = array(
     0 => '',
