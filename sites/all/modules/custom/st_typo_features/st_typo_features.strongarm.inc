@@ -739,7 +739,6 @@ function st_typo_features_strongarm() {
   $strongarm->name = 'node_options_client';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_client'] = $strongarm;
 
@@ -929,7 +928,7 @@ function st_typo_features_strongarm() {
   $export['owlcarousel_navigation_text_owlcarousel_settings_4-colums-navigation'] = $strongarm;
 
   $strongarm = new stdClass();
-  $strongarm->disabled = TRUE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'owlcarousel_pagination_owlcarousel_settings_4-colums-navigation';
   $strongarm->value = 0;
