@@ -807,6 +807,7 @@ function st_typo_features_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'second parallax';
+  $handler->display->display_options['css_class'] = 'container';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -885,7 +886,7 @@ function st_typo_features_views_default_views() {
   /* Display: Second Parallax */
   $handler = $view->new_display('block', 'Second Parallax', 'block_1');
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'owlcarousel';
@@ -920,6 +921,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['field_single_image']['field'] = 'field_single_image';
   $handler->display->display_options['fields']['field_single_image']['label'] = '';
   $handler->display->display_options['fields']['field_single_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_single_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_single_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_single_image']['settings'] = array(
     'image_style' => '',
@@ -1005,10 +1007,11 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['field_about_image']['table'] = 'field_data_field_about_image';
   $handler->display->display_options['fields']['field_about_image']['field'] = 'field_about_image';
   $handler->display->display_options['fields']['field_about_image']['label'] = '';
+  $handler->display->display_options['fields']['field_about_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_about_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_about_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_about_image']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'large',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -1047,8 +1050,10 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="about-post">
-	<h2>[title]</h2>
+        [field_about_image]<br>
+	<br><h2>[title]</h2>
 	[body]
+        <br>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
@@ -1713,6 +1718,7 @@ function st_typo_features_views_default_views() {
   /* Display: Team view */
   $handler = $view->new_display('block', 'Team view', 'block_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'container';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'owlcarousel';
   $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_4-colums-navigation';
@@ -1721,15 +1727,6 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div class="title-section">
-	<h1 class="typo"><center>MEET OUR VOLUNTEERS AND MENTORS</center></h1>
-	
-</div>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_single_image']['id'] = 'field_single_image';

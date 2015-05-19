@@ -921,7 +921,7 @@ function st_typo_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'owlcarousel_items_desktop_owlcarousel_settings_4-colums-navigation_width';
-  $strongarm->value = 900;
+  $strongarm->value = 1199;
   $export['owlcarousel_items_desktop_owlcarousel_settings_4-colums-navigation_width'] = $strongarm;
 
   $strongarm = new stdClass();
