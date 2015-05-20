@@ -1117,8 +1117,8 @@ blockquote {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    padding: 70px 0;
-    margin-top: 65px;
+    padding: 30px 0;
+    margin-top: 0px;
 }
 
 .team-box h1 {
@@ -2099,3 +2099,24 @@ padding: 8px 16px 6px 16px; }
     margin: 0px 5px 10px;
     box-shadow: 0px 0px 2px 0px #795E3A;
 }
+
+.block-text {
+ font-size: 1.23077em;
+ line-height: 2.5;
+ color: #FFF;
+}
+
+.b-btn-large {
+    transition: #6363CE 0.5s ease 0s;
+    background: #E9682E none repeat scroll 0% 0%;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0px 35px 14px;
+    margin-bottom: 30px;
+    border-bottom: 7px solid #BF5526;
+}
+
+.b-bottom-padding {
+  padding-bottom: 32px;
+}
+
