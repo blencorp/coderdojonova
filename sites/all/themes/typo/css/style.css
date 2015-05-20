@@ -2053,6 +2053,7 @@ padding: 8px 16px 6px 16px; }
     background: #FFF none repeat scroll 0% 0%;
     border: 1px solid #DEDEDE;
     border-radius: 2px;
+    margin: 15px 0px;
 }
 
 .b-section {
@@ -2074,4 +2075,27 @@ padding: 8px 16px 6px 16px; }
 
 .b-right {
     float: right;
+}
+
+.b-image {
+    border-bottom: 2px solid #E26228;
+    position: relative;
+    margin-left: -19px;
+    margin-top: -37px;
+}
+
+.f-center {
+    text-align: center;
+    font-size: 1.23077em;
+    color: #FFF;
+}
+
+.b-dark {
+    border-bottom: 1px solid #4F4F4F;
+    background: #333 none repeat scroll 0% 0%;
+}
+
+.b-padding {
+    margin: 0px 5px 10px;
+    box-shadow: 0px 0px 2px 0px #795E3A;
 }
