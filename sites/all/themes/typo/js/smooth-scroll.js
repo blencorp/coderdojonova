@@ -112,7 +112,7 @@ $(document).ready(function($) {
 					
 				} else {
 					
-					nav_container.css({ 'height':'96px' });
+					nav_container.css({ 'height':'74px' });
 					nav.stop().removeClass("active").css("top",nav.outerHeight()+waypoint_offset).animate({"top":""});
 					//nav_container.stop().removeClass("active").css("top",nav.outerHeight()+waypoint_offset).animate({"top":""});
 					
