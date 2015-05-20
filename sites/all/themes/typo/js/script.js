@@ -47,12 +47,12 @@ $(document).ready(function($) {
 		portfolio_owl_control.find('.owl-prev').append('<i class="fa fa-chevron-left"></i>');
 		portfolio_owl_control.find('.owl-next').append('<i class="fa fa-chevron-right"></i>');
 		$(sectionid + ' ' + viewClass).append(portfolio_owl_control);
-		if ($(sectionid + ' .owl-item').length > 0) {
-			var clone_item = $(sectionid + ' .owl-item').first().clone();
-			clone_item.html($(sectionid + ' .view-header'));
-			$(sectionid + ' .view-header').remove();
-			$(sectionid + ' .owl-wrapper-outer .owl-wrapper').prepend(clone_item);
-		}
+		//if ($(sectionid + ' .owl-item').length > 0) {
+			//var clone_item = $(sectionid + ' .owl-item').first().clone();
+			//clone_item.html($(sectionid + ' .view-header'));
+			//$(sectionid + ' .view-header').remove();
+			//$(sectionid + ' .owl-wrapper-outer .owl-wrapper').prepend(clone_item);
+		//}
 	}	
 
 	function updateWidthFirstItemOwlCarousel(sectionid) {
