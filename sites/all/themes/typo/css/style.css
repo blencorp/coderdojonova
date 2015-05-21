@@ -2120,3 +2120,16 @@ padding: 8px 16px 6px 16px; }
   padding-bottom: 32px;
 }
 
+.b-employee {
+    background: #FAFAFA none repeat scroll 0% 0%;
+    border: 1px solid #E3E3E3;
+    border-radius: 3px;
+    overflow: hidden;
+    padding-bottom: 7px;
+    text-align: center;
+}
+
+.b-employee-text {
+  color: #E9682E;
+  text-transform: uppercase;
+} 
