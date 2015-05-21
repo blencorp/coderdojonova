@@ -329,6 +329,12 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['title'] = 'Our Blog';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'container';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'Read More';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -813,9 +819,10 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'owlcarousel';
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -864,33 +871,43 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
 
   /* Display: First Parallax */
   $handler = $view->new_display('block', 'First Parallax', 'block');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<br></br><br></br><br></br>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="f-center">
+<div class="b-btn b-btn-default b-dark b-padding">
+   <a class="f-btn" href="google.com">
+   <i class="fa fa-desktop"></i>
+    view demo</a>
+</div>
+<div class= "b-btn b-btn-default b-padding">
+   <a  class="f-btn" href="google.com">
+    join us </a>
+</div>
+</div><br><br>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 
   /* Display: Second Parallax */
   $handler = $view->new_display('block', 'Second Parallax', 'block_1');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'owlcarousel';
-  $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_4-colums-navigation';
+  $handler->display->display_options['style_options']['instance'] = 'owlcarousel_settings_default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -900,18 +917,20 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div class="vc_col-sm-12 wpb_column vc_column_container">
-		<div class="wpb_wrapper">
-				<div class="title-section"><font color="white">
-		<h1 class="typo"><center>HOUR of CODE Partners</center></h1>
-		
-					<div><br></br><br></br><br></br>
-                         <h2>Become a partner to introduce millions of student to one hour of computer science and computer programming</h2></font>
+  $handler->display->display_options['header']['area']['content'] = '<div class="vc_col-sm-12 wpb_column vc_column_container f-center">
+  <div class="wpb_wrapper">
+    <div class="title-section"><font color="white">
+      <h1 class="typo"><center>HOUR of CODE Partners</center></h1>
+    </div>
+     <div  class="block-text">
+          Become a partner to introduce millions of student to one hour of computer science and computer programming
+      </div>
+     </div>
+<div class= "b-btn-large b-btn-default">
+   <a  class="f-btn" href="google.com">
+     learn more </a>
 </div>
-			</div>
-	
-
-		</div> 
+</div> 
 	</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -921,6 +940,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['field_single_image']['field'] = 'field_single_image';
   $handler->display->display_options['fields']['field_single_image']['label'] = '';
   $handler->display->display_options['fields']['field_single_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_single_image']['element_wrapper_class'] = 'b-bottom-padding';
   $handler->display->display_options['fields']['field_single_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_single_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_single_image']['settings'] = array(
@@ -1727,6 +1747,14 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<div class="title-section">
+	<h1 class="typo"><center>Meet Our Volunteers and Mentors</center></h1><br>
+</div>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_single_image']['id'] = 'field_single_image';
@@ -1749,6 +1777,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<h3>[title]</h3>';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Job Title */
   $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
@@ -1774,10 +1803,14 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_single_image]<br>
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="b-employee">
+[field_single_image]<br>
+<div class="b-employee-text">
 [title]
 [field_job_title]
-[field_bio]<br>';
+</div>
+[field_bio]<br>
+</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'team-box2';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
