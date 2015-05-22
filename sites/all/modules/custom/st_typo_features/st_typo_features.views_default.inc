@@ -337,7 +337,7 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['use_more_text'] = 'Read More';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
@@ -354,11 +354,19 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<div class="button">
-	<a href="/blogs">View All</a>
-</div>';
+  $handler->display->display_options['footer']['area']['content'] = '<br><br>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = '<a href="node/[nid]">Read more</a>';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -479,7 +487,7 @@ function st_typo_features_views_default_views() {
 			<h2>[title]</h2>	
 			<div class="info">by [name] in <div class="tag">[field_tags]</div><p class="comment">[comment_count] Comments<p></div>
 		
-			<div class="blog-text">[body]</div>
+			<div class="blog-text">[body]<br>[nid]</div>
 		</div>
 	</div> <!-- end article-box-->
 </div>';
@@ -1796,8 +1804,51 @@ function st_typo_features_views_default_views() {
   $handler->display->display_options['fields']['field_bio']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_bio']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['field_bio']['settings'] = array(
-    'trim_length' => '600',
+    'trim_length' => '300',
   );
+  /* Field: Content: GPlus */
+  $handler->display->display_options['fields']['field_member_gplus']['id'] = 'field_member_gplus';
+  $handler->display->display_options['fields']['field_member_gplus']['table'] = 'field_data_field_member_gplus';
+  $handler->display->display_options['fields']['field_member_gplus']['field'] = 'field_member_gplus';
+  $handler->display->display_options['fields']['field_member_gplus']['label'] = '';
+  $handler->display->display_options['fields']['field_member_gplus']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_member_gplus']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_member_gplus']['alter']['text'] = '<a class="b-employee-social" href="[field_member_gplus-url]">
+<i class="fa fa-google-plus"></i>
+</a>';
+  $handler->display->display_options['fields']['field_member_gplus']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_member_gplus']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_member_gplus']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_member_gplus']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_member_gplus']['type'] = 'link_absolute';
+  /* Field: Content: LinkedIn */
+  $handler->display->display_options['fields']['field_member_linkedin']['id'] = 'field_member_linkedin';
+  $handler->display->display_options['fields']['field_member_linkedin']['table'] = 'field_data_field_member_linkedin';
+  $handler->display->display_options['fields']['field_member_linkedin']['field'] = 'field_member_linkedin';
+  $handler->display->display_options['fields']['field_member_linkedin']['label'] = '';
+  $handler->display->display_options['fields']['field_member_linkedin']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_member_linkedin']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_member_linkedin']['alter']['text'] = '<a class="b-employee-social" href="[field_member_linkedin-url]">
+<i class="fa fa-linkedin"></i>
+</a>';
+  $handler->display->display_options['fields']['field_member_linkedin']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_member_linkedin']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_member_linkedin']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_member_linkedin']['click_sort_column'] = 'url';
+  /* Field: Content: Twitter */
+  $handler->display->display_options['fields']['field_member_twitter']['id'] = 'field_member_twitter';
+  $handler->display->display_options['fields']['field_member_twitter']['table'] = 'field_data_field_member_twitter';
+  $handler->display->display_options['fields']['field_member_twitter']['field'] = 'field_member_twitter';
+  $handler->display->display_options['fields']['field_member_twitter']['label'] = '';
+  $handler->display->display_options['fields']['field_member_twitter']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_member_twitter']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_member_twitter']['alter']['text'] = '<a class="b-employee-social" href="[field_member_twitter-url]">
+<i class="fa fa-twitter"></i>
+</a>';
+  $handler->display->display_options['fields']['field_member_twitter']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_member_twitter']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_member_twitter']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['field_member_twitter']['click_sort_column'] = 'url';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -1809,7 +1860,14 @@ function st_typo_features_views_default_views() {
 [title]
 [field_job_title]
 </div>
+<div class="b-employee-body">
 [field_bio]<br>
+</div>
+<div class="b-employee-item-social">
+[field_member_gplus]
+[field_member_linkedin]
+[field_member_twitter]
+</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'team-box2';

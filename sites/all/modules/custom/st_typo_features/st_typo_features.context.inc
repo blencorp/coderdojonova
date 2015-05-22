@@ -103,23 +103,11 @@ function st_typo_features_context_default_contexts() {
           'region' => 'content',
           'weight' => '-17',
         ),
-        'views-first_parallax-block_2' => array(
-          'module' => 'views',
-          'delta' => 'first_parallax-block_2',
-          'region' => 'content',
-          'weight' => '-16',
-        ),
         'views-pricing_table-block' => array(
           'module' => 'views',
           'delta' => 'pricing_table-block',
           'region' => 'content',
           'weight' => '-15',
-        ),
-        'block-7' => array(
-          'module' => 'block',
-          'delta' => '7',
-          'region' => 'content',
-          'weight' => '-10',
         ),
       ),
     ),
